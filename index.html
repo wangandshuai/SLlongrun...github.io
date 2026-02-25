@@ -6,13 +6,13 @@
     <title>极速耐力 | 长跑者全书 2026</title>
     <style>
         :root {
-            --running-teal: #4A7868; /* 长跑主色调-森林绿（更沉稳） */
-            --running-slate: #353849; /* 灰蓝色（更贴近赛道灰） */
-            --running-red: #D86A4F;   /* 赛道红（更活力） */
-            --running-sand: #F8F5E4;  /* 跑道沙色背景 */
-            --running-gold: #F0C078;  /* 奖牌金 */
-            --running-white: #FFFFFF; /* 纯净白 */
-            --running-shadow: rgba(74, 120, 104, 0.15); /* 主题阴影 */
+            --running-teal: #A6B8A9;
+            --running-slate: #353849;
+            --running-red: #D86A4F;
+            --running-sand: #F8F5E4;
+            --running-gold: #F0C078;
+            --running-white: #FFFFFF;
+            --running-shadow: rgba(74, 120, 104, 0.15);
         }
 
         * { box-sizing: border-box; }
@@ -23,9 +23,11 @@
             color: var(--running-slate);
             overflow-x: hidden;
             line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* --- 长跑风格转场动画：模拟赛道冲刺/接力效果 --- */
         #transition-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -34,7 +36,7 @@
             z-index: 999;
             opacity: 0;
             pointer-events: none;
-            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1); /* 更具运动感的曲线 */
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -46,7 +48,6 @@
             text-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
-        /* 跑步轨迹动画 */
         #transition-overlay::before {
             content: "";
             position: absolute;
@@ -63,12 +64,10 @@
         .fade-active { 
             opacity: 1 !important; 
         }
-
         .fade-active::before {
             transform: scaleX(1);
         }
 
-        /* --- 导航栏：赛道风格设计 --- */
         nav {
             background: var(--running-white);
             padding: 12px 15px;
@@ -96,7 +95,6 @@
             font-size: 0.95rem;
         }
 
-        /* 跑道线样式的下划线 */
         nav button::after {
             content: '';
             position: absolute;
@@ -122,17 +120,16 @@
             font-weight: 700;
         }
 
-        /* --- 页面布局：更具运动感 --- */
         .page { 
             display: none; 
             padding: 60px 20px; 
             max-width: 1200px; 
             margin: 0 auto; 
             animation: runIn 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+            flex: 1;
         }
         .page.active { display: block; }
 
-        /* 跑步入场动画：模拟从远处跑来的效果 */
         @keyframes runIn {
             from { 
                 opacity: 0; 
@@ -144,7 +141,6 @@
             }
         }
 
-        /* --- 标题设计：多样化+长跑元素 --- */
         .page-title { 
             font-size: 2.8rem; 
             color: var(--running-teal);
@@ -156,7 +152,6 @@
             padding-bottom: 20px;
         }
 
-        /* 标题下方的跑道装饰线 */
         .page-title::after {
             content: "";
             position: absolute;
@@ -169,68 +164,20 @@
             border-radius: 4px;
         }
 
-        /* 不同页面标题的差异化样式 */
-        .title-style-1 { /* 跑者档案 */
-            font-family: 'Times New Roman', serif;
-            color: var(--running-teal);
-            text-transform: capitalize;
-        }
+        .title-style-1 { font-family: 'Times New Roman', serif; color: var(--running-teal); }
+        .title-style-2 { color: var(--running-slate); font-weight: 300; font-size: 3rem; }
+        .title-style-3 { color: var(--running-red); font-style: italic; }
+        .title-style-4 { color: var(--running-gold); text-shadow: 0 2px 5px rgba(240, 192, 120, 0.3); }
+        .title-style-5 { letter-spacing: 5px; text-transform: uppercase; }
+        .title-style-6 { font-weight: 700; color: var(--running-teal); }
+        .title-style-7 { color: var(--running-red); border-bottom: 2px solid var(--running-red); display: inline-block; padding-bottom: 10px; }
+        .title-style-8 { font-size: 3.2rem; color: var(--running-gold); }
+        .title-style-9 { font-weight: 200; font-style: italic; color: var(--running-slate); }
+        .title-style-10 { background: linear-gradient(90deg, var(--running-teal), var(--running-gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
-        .title-style-2 { /* 岁月足迹 */
-            color: var(--running-slate);
-            font-weight: 300;
-            font-size: 3rem;
-        }
-
-        .title-style-3 { /* 呼吸之道 */
-            color: var(--running-red);
-            font-style: italic;
-        }
-
-        .title-style-4 { /* 轻盈装备 */
-            color: var(--running-gold);
-            text-shadow: 0 2px 5px rgba(240, 192, 120, 0.3);
-        }
-
-        .title-style-5 { /* 能量源泉 */
-            letter-spacing: 5px;
-            text-transform: uppercase;
-        }
-
-        .title-style-6 { /* 秘境路线 */
-            font-weight: 700;
-            color: var(--running-teal);
-        }
-
-        .title-style-7 { /* 赛事契约 */
-            color: var(--running-red);
-            border-bottom: 2px solid var(--running-red);
-            display: inline-block;
-            padding-bottom: 10px;
-        }
-
-        .title-style-8 { /* 终点礼赞 */
-            font-size: 3.2rem;
-            color: var(--running-gold);
-        }
-
-        .title-style-9 { /* 孤独哲学 */
-            font-weight: 200;
-            font-style: italic;
-            color: var(--running-slate);
-        }
-
-        .title-style-10 { /* 启程加入 */
-            background: linear-gradient(90deg, var(--running-teal), var(--running-gold));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        /* --- 首页：18人深度档案 --- */
         .member-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
         }
 
@@ -245,15 +192,13 @@
             position: relative;
         }
 
-        /* 卡片悬停：模拟起跑加速效果 */
         .member-card:hover { 
             transform: translateY(-12px) scale(1.02); 
             box-shadow: 0 25px 50px rgba(74, 120, 104, 0.2); 
         }
 
-        /* 卡片编号：赛道号码布样式 */
         .card-header {
-            background: linear-gradient(135deg, var(--running-teal), #3A6858);
+            background: linear-gradient(135deg, var(--running-teal), #8A9A8D);
             color: var(--running-white);
             padding: 18px;
             text-align: center;
@@ -261,27 +206,11 @@
             letter-spacing: 2px;
         }
 
-        .img-placeholder {
+        .member-img {
             width: 100%;
             height: 220px;
-            background: linear-gradient(180deg, #f9f9f9, #f2f2e8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.95rem;
-            color: var(--running-teal);
-            border-bottom: 1px solid rgba(74, 120, 104, 0.1);
-            position: relative;
-        }
-
-        /* 图片占位符添加跑道纹理 */
-        .img-placeholder::before {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: linear-gradient(90deg, rgba(74, 120, 104, 0.03) 1px, transparent 1px);
-            background-size: 20px 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .card-body { padding: 28px; }
@@ -314,7 +243,6 @@
             padding-top: 18px;
         }
 
-        /* --- 其他页面样式 --- */
         .content-box {
             background: var(--running-white);
             padding: 45px;
@@ -324,7 +252,6 @@
             border-top: 4px solid var(--running-teal);
         }
 
-        /* 表单样式优化 */
         input[type="text"] {
             width:100%; 
             padding:14px 18px; 
@@ -343,13 +270,13 @@
 
         button[type="button"], .content-box button {
             width:100%; 
-            background:linear-gradient(90deg, var(--running-teal), #5A8878); 
+            background:linear-gradient(90deg, var(--running-teal), #8A9A8D); 
             color:white; 
             padding:16px; 
             border:none; 
             border-radius:8px; 
             cursor:pointer;
-            font-size:1.1rem;
+            font-size: 1.1rem;
             font-weight:600;
             transition: all 0.4s ease;
             box-shadow: 0 4px 15px rgba(74, 120, 104, 0.2);
@@ -358,9 +285,90 @@
         button[type="button"]:hover, .content-box button:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(74, 120, 104, 0.3);
-            background:linear-gradient(90deg, #3A6858, var(--running-teal));
+            background:linear-gradient(90deg, #8A9A8D, var(--running-teal));
+        }
+
+        footer {
+            background: linear-gradient(180deg, var(--running-slate), #252839);
+            color: var(--running-white);
+            padding: 40px 20px 20px;
+            margin-top: 60px;
+            border-top: 5px solid var(--running-gold);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-column h3 {
+            color: var(--running-gold);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--running-red);
+            border-radius: 2px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-column ul li:hover {
+            transform: translateX(5px);
+        }
+
+        .footer-column ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--running-gold);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.9rem;
+            color: #b0b0b0;
+        }
+
+        .footer-contact {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--running-red);
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -382,17 +390,197 @@
 <!-- 第1页：18人档案 -->
 <section id="p1" class="page active">
     <h1 class="page-title title-style-1">核心成员 · 18位行者</h1>
-    <div class="member-grid" id="memberGrid">
-        <!-- JS 生成 -->
+    <div class="member-grid">
+        
+        <div class="member-card">
+            <div class="card-header">NO.202601</div>
+            <img src="C:\Users\wang\Downloads\长跑者全书网页设计.png" class="member-img" alt="王荣泽">
+            <div class="card-body">
+                <h2 class="member-name">王荣泽</h2>
+                <span class="member-title">胜职大迫杰</span>
+                <p class="member-intro">马拉松国家二级运动员，坚信跑步是通往内心宁静的捷径。已完成50场全马。</p>
+            </div>
+        </div>
+
+        <div class="member-card">
+            <div class="card-header">NO.202602</div>
+            <img src="林悦.jpg" class="member-img" alt="林悦">
+            <div class="card-body">
+                <h2 class="member-name">林悦</h2>
+                <span class="member-title">晨曦破风手</span>
+                <p class="member-intro">擅长间歇跑，社团女子纪录保持者。她的步伐轻盈得像清晨的微风。</p>
+            </div>
+        </div>
+
+        <div class="member-card">
+            <div class="card-header">NO.202603</div>
+            <img src="陈志强.jpg" class="member-img" alt="陈志强">
+            <div class="card-body">
+                <h2 class="member-name">陈志强</h2>
+                <span class="member-title">耐力工匠</span>
+                <p class="member-intro">从100公斤减重到65公斤的励志传奇，专注于超长距离越野赛。</p>
+            </div>
+        </div>
+
+        <div class="member-card">
+            <div class="card-header">NO.202604</div>
+            <img src="王小雨.jpg" class="member-img" alt="王小雨">
+            <div class="card-body">
+                <h2 class="member-name">王小雨</h2>
+                <span class="member-title">补给天使</span>
+                <p class="member-intro">不仅跑得快，还是运动营养专家。负责全员的赛前碳水储备计划。</p>
+            </div>
+        </div>
+
+        <div class="member-card">
+            <div class="card-header">NO.202605</div>
+            <img src="李大壮.jpg" class="member-img" alt="李大壮">
+            <div class="card-body">
+                <h2 class="member-name">李大壮</h2>
+                <span class="member-title">核心守护者</span>
+                <p class="member-intro">力量训练狂热者，负责纠正新人的跑步姿态，减少运动损伤。</p>
+            </div>
+        </div>
+
+        <div class="member-card">
+            <div class="card-header">NO.202606</div>
+            <img src="苏珊.jpg" class="member-img" alt="苏珊">
+            <div class="card-body">
+                <h2 class="member-name">苏珊</h2>
+                <span class="member-title">光影记录者</span>
+                <p class="member-intro">带着相机奔跑的女孩，社团绝大多数珍贵瞬间都出自她的镜头。</p>
+            </div>
+        </div>
+
+        <div class="member-card">
+            <div class="card-header">NO.202607</div>
+            <img src="赵雷.jpg" class="member-img" alt="赵雷">
+            <div class="card-body">
+                <h2 class="member-name">赵雷</h2>
+                <span class="member-title">深夜行者</span>
+                <p class="member-intro">比起晨跑更爱夜跑，他认为夜晚的街道拥有最纯粹的节奏。</p>
+            </div>
+        </div>
+
+        <div class="member-card">
+            <div class="card-header">NO.202608</div>
+            <img src="张婷.jpg" class="member-img" alt="张婷">
+            <div class="card-body">
+                <h2 class="member-name">张婷</h2>
+                <span class="member-title">律动节拍器</span>
+                <p class="member-intro">配速极其精准，是社团最可靠的“兔子”（领跑员）。</p>
+            </div>
+        </div>
+
+        <div class="member-card">
+            <div class="card-header">NO.202609</div>
+            <img src="刘星.jpg" class="member-img" alt="刘星">
+            <div class="card-body">
+                <h2 class="member-name">刘星</h2>
+                <span class="member-title">数据分析师</span>
+                <p class="member-intro">痴迷于各类运动手表数据，能通过心率变异性预判你的疲劳状态。</p>
+            </div>
+        </div>
+
+        <div class="member-card">
+            <div class="card-header">NO.202610</div>
+            <img src="孙浩.jpg" class="member-img" alt="孙浩">
+            <div class="card-body">
+                <h2 class="member-name">孙浩</h2>
+                <span class="member-title">赤足行者</span>
+                <p class="member-intro">极简主义跑步倡导者，喜欢感受脚掌与大地最直接的接触。</p>
+            </div>
+        </div>
+
+        <div class="member-card">
+            <div class="card-header">NO.202611</div>
+            <img src="周美.jpg" class="member-img" alt="周美">
+            <div class="card-body">
+                <h2 class="member-name">周美</h2>
+                <span class="member-title">百马玫瑰</span>
+                <p class="member-intro">目标是跑遍全球100个不同的马拉松城市，目前已打卡32个。</p>
+            </div>
+        </div>
+
+        <div class="member-card">
+            <div class="card-header">NO.202612</div>
+            <img src="郑凯.jpg" class="member-img" alt="郑凯">
+            <div class="card-body">
+                <h2 class="member-name">郑凯</h2>
+                <span class="member-title">坡道之王</span>
+                <p class="member-intro">在任何爬升面前从不低头，是山地越野赛的常客。</p>
+            </div>
+        </div>
+
+        <div class="member-card">
+            <div class="card-header">NO.202613</div>
+            <img src="冯杰.jpg" class="member-img" alt="冯杰">
+            <div class="card-body">
+                <h2 class="member-name">冯杰</h2>
+                <span class="member-title">装备极客</span>
+                <p class="member-intro">对每一款碳板跑鞋的构造了如指掌，社团的采购顾问。</p>
+            </div>
+        </div>
+
+        <div class="member-card">
+            <div class="card-header">NO.202614</div>
+            <img src="吴娜.jpg" class="member-img" alt="吴娜">
+            <div class="card-body">
+                <h2 class="member-name">吴娜</h2>
+                <span class="member-title">瑜伽跑者</span>
+                <p class="member-intro">将瑜伽的呼吸法融入长跑，主张身心的绝对平衡。</p>
+            </div>
+        </div>
+
+        <div class="member-card">
+            <div class="card-header">NO.202615</div>
+            <img src="徐坤.jpg" class="member-img" alt="徐坤">
+            <div class="card-body">
+                <h2 class="member-name">徐坤</h2>
+                <span class="member-title">校园先锋</span>
+                <p class="member-intro">最年轻的成员，代表着社团未来的速度与希望。</p>
+            </div>
+        </div>
+
+        <div class="member-card">
+            <div class="card-header">NO.202616</div>
+            <img src="马龙.jpg" class="member-img" alt="马龙">
+            <div class="card-body">
+                <h2 class="member-name">马龙</h2>
+                <span class="member-title">铁人跨界者</span>
+                <p class="member-intro">铁人三项爱好者，长跑只是他训练计划中的冰山一角。</p>
+            </div>
+        </div>
+
+        <div class="member-card">
+            <div class="card-header">NO.202617</div>
+            <img src="丁宁.jpg" class="member-img" alt="丁宁">
+            <div class="card-body">
+                <h2 class="member-name">丁宁</h2>
+                <span class="member-title">康复导师</span>
+                <p class="member-intro">职业物理治疗师，是大家无伤奔跑的最强后盾。</p>
+            </div>
+        </div>
+
+        <div class="member-card">
+            <div class="card-header">NO.202618</div>
+            <img src="郭威.jpg" class="member-img" alt="郭威">
+            <div class="card-body">
+                <h2 class="member-name">郭威</h2>
+                <span class="member-title">终身跑者</span>
+                <p class="member-intro">60岁的他依然活跃在赛道，诠释了长跑是一辈子的事。</p>
+            </div>
+        </div>
+
     </div>
 </section>
 
-<!-- 第2页：社团历程 -->
+<!-- 第2页：岁月足迹 -->
 <section id="p2" class="page">
     <h1 class="page-title title-style-2">岁月足迹 · 跑过的时光</h1>
     <div class="content-box">
         <p>从2022年的第一场晨跑开始，我们不只是在路面上留下脚印，更是在时光中刻下坚持。每一个里程碑都记录着从孤独奔跑到并肩作战的转变。</p>
-        <div class="img-placeholder" style="height:300px; margin-top:20px;">【此处插入：社团成立初期的老照片 - 建议暖色调】</div>
+        <img src="岁月足迹.jpg" style="width:100%;height:300px;object-fit:cover;border-radius:12px;margin-top:20px;" alt="岁月足迹">
     </div>
 </section>
 
@@ -402,21 +590,27 @@
     <div class="content-box" style="border-right: 5px solid var(--running-teal);">
         <h2>MAF180 训练法</h2>
         <p>在柔和的节奏中建立强大的有氧基础。我们主张“无伤奔跑”，让心脏在最舒适的区间律动。</p>
-        <div class="img-placeholder" style="height:200px;">【此处插入：平滑的心率曲线图表】</div>
+        <img src="心率图表.jpg" style="width:100%;height:200px;object-fit:cover;border-radius:12px;margin-top:10px;" alt="心率图表">
     </div>
 </section>
 
-<!-- 第4页：装备 -->
+<!-- 第4页：轻盈装备 -->
 <section id="p4" class="page">
     <h1 class="page-title title-style-4">轻盈装备 · 无负担奔跑</h1>
     <div class="member-grid">
         <div class="member-card">
-            <div class="img-placeholder">【缓震系跑鞋特写】</div>
-            <div class="card-body"><h3>云端足感</h3><p>适合长距离LSD训练，像踩在云朵上奔跑。</p></div>
+            <img src="跑鞋.jpg" class="member-img" alt="跑鞋">
+            <div class="card-body">
+                <h3>云端足感</h3>
+                <p>适合长距离LSD训练，像踩在云朵上奔跑。</p>
+            </div>
         </div>
         <div class="member-card">
-            <div class="img-placeholder">【超轻风衣】</div>
-            <div class="card-body"><h3>破风而行</h3><p>极速排汗技术，应对多变的清晨天气。</p></div>
+            <img src="跑步风衣.jpg" class="member-img" alt="跑步风衣">
+            <div class="card-body">
+                <h3>破风而行</h3>
+                <p>极速排汗技术，应对多变的清晨天气。</p>
+            </div>
         </div>
     </div>
 </section>
@@ -426,7 +620,7 @@
     <h1 class="page-title title-style-5">能量源泉 · 补给的智慧</h1>
     <div class="content-box">
         <p>长跑不只是体能的较量，更是能量补给的科学。合理的碳水摄入、电解质补充，让每一步都充满力量。</p>
-        <div class="img-placeholder" style="height:250px; margin-top:20px;">【此处插入：运动补给品搭配展示】</div>
+        <img src="运动补给.jpg" style="width:100%;height:250px;object-fit:cover;border-radius:12px;margin-top:20px;" alt="运动补给">
     </div>
 </section>
 
@@ -435,7 +629,7 @@
     <h1 class="page-title title-style-6">秘境路线 · 城市跑者地图</h1>
     <div class="content-box">
         <p>避开喧嚣的街道，我们探索城市中那些少有人知的跑步秘境，在自然与城市的交融中感受奔跑的乐趣。</p>
-        <div class="img-placeholder" style="height:300px; margin-top:20px;">【此处插入：城市跑步路线地图】</div>
+        <img src="跑步路线地图.jpg" style="width:100%;height:300px;object-fit:cover;border-radius:12px;margin-top:20px;" alt="跑步路线地图">
     </div>
 </section>
 
@@ -444,7 +638,7 @@
     <h1 class="page-title title-style-7">赛事契约 · 与自己的约定</h1>
     <div class="content-box">
         <p>每一场赛事都是与自己的约定，是对训练成果的检验，更是对自我极限的挑战。尊重赛道，尊重对手，更尊重那个全力以赴的自己。</p>
-        <div class="img-placeholder" style="height:280px; margin-top:20px;">【此处插入：马拉松赛事冲线瞬间】</div>
+        <img src="赛事冲线.jpg" style="width:100%;height:280px;object-fit:cover;border-radius:12px;margin-top:20px;" alt="赛事冲线">
     </div>
 </section>
 
@@ -453,7 +647,7 @@
     <h1 class="page-title title-style-8">终点礼赞 · 不止于到达</h1>
     <div class="content-box">
         <p>终点不是结束，而是新的开始。每一次冲线的喜悦，都将成为下一次出发的动力。我们为每一个坚持到终点的跑者喝彩。</p>
-        <div class="img-placeholder" style="height:320px; margin-top:20px;">【此处插入：选手佩戴奖牌的喜悦瞬间】</div>
+        <img src="奖牌瞬间.jpg" style="width:100%;height:320px;object-fit:cover;border-radius:12px;margin-top:20px;" alt="奖牌瞬间">
     </div>
 </section>
 
@@ -462,7 +656,7 @@
     <h1 class="page-title title-style-9">孤独哲学 · 与自己对话</h1>
     <div class="content-box" style="text-align: center; font-style: italic;">
         <p style="font-size: 1.4rem;">“在漫长的赛道上，你最终遇见的不是终点，而是那个从未放弃的自己。”</p>
-        <div class="img-placeholder" style="height:400px; margin-top:30px;">【此处插入：晨雾中远去的跑者背影】</div>
+        <img src="晨雾跑者.jpg" style="width:100%;height:400px;object-fit:cover;border-radius:12px;margin-top:30px;" alt="晨雾跑者">
     </div>
 </section>
 
@@ -471,94 +665,77 @@
     <h1 class="page-title title-style-10">启程加入 · 成为更好的自己</h1>
     <div class="content-box" style="max-width: 600px; margin: 0 auto;">
         <p>如果你也向往清晨的第一缕阳光，渴望在奔跑中遇见更好的自己，欢迎加入我们的长跑大家庭。</p>
-        <input type="text" placeholder="你的姓名" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd;">
-        <input type="text" placeholder="你的跑步经验（可选）" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd;">
-        <button style="width:100%; background:var(--running-teal); color:white; padding:15px; border:none; border-radius:5px; cursor:pointer;">提交申请</button>
+        <input type="text" placeholder="你的姓名">
+        <input type="text" placeholder="你的跑步经验（可选）">
+        <button>提交申请</button>
     </div>
 </section>
 
-<script>
-    // 18位成员数据
-    const members = [
-        {name: "周博文", title: "精神领袖", intro: "马拉松国家二级运动员，坚信跑步是通往内心宁静的捷径。已完成50场全马。"},
-        {name: "林悦", title: "晨曦破风手", intro: "擅长间歇跑，社团女子纪录保持者。她的步伐轻盈得像清晨的微风。"},
-        {name: "陈志强", title: "耐力工匠", intro: "从100公斤减重到65公斤的励志传奇，专注于超长距离越野赛。"},
-        {name: "王小雨", title: "补给天使", intro: "不仅跑得快，还是运动营养专家。负责全员的赛前碳水储备计划。"},
-        {name: "李大壮", title: "核心守护者", intro: "力量训练狂热者，负责纠正新人的跑步姿态，减少运动损伤。"},
-        {name: "苏珊", title: "光影记录者", intro: "带着相机奔跑的女孩，社团绝大多数珍贵瞬间都出自她的镜头。"},
-        {name: "赵雷", title: "深夜行者", intro: "比起晨跑更爱夜跑，他认为夜晚的街道拥有最纯粹的节奏。"},
-        {name: "张婷", title: "律动节拍器", intro: "配速极其精准，是社团最可靠的“兔子”（领跑员）。"},
-        {name: "刘星", title: "数据分析师", intro: "痴迷于各类运动手表数据，能通过心率变异性预判你的疲劳状态。"},
-        {name: "孙浩", title: "赤足行者", intro: "极简主义跑步倡导者，喜欢感受脚掌与大地最直接的接触。"},
-        {name: "周美", title: "百马玫瑰", intro: "目标是跑遍全球100个不同的马拉松城市，目前已打卡32个。"},
-        {name: "郑凯", title: "坡道之王", intro: "在任何爬升面前从不低头，是山地越野赛的常客。"},
-        {name: "冯杰", title: "装备极客", intro: "对每一款碳板跑鞋的构造了如指掌，社团的采购顾问。"},
-        {name: "吴娜", title: "瑜伽跑者", intro: "将瑜伽的呼吸法融入长跑，主张身心的绝对平衡。"},
-        {name: "徐坤", title: "校园先锋", intro: "最年轻的成员，代表着社团未来的速度与希望。"},
-        {name: "马龙", title: "铁人跨界者", intro: "铁人三项爱好者，长跑只是他训练计划中的冰山一角。"},
-        {name: "丁宁", title: "康复导师", intro: "职业物理治疗师，是大家无伤奔跑的最强后盾。"},
-        {name: "郭威", title: "终身跑者", intro: "60岁的他依然活跃在赛道，诠释了长跑是一辈子的事。"}
-    ];
-
-    const grid = document.getElementById('memberGrid');
-    members.forEach((m, i) => {
-        grid.innerHTML += `
-            <div class="member-card">
-                <div class="card-header">NO.${202601 + i}</div>
-                <div class="img-placeholder">【此处插入：${m.name} 的运动风采照】</div>
-                <div class="card-body">
-                    <h2 class="member-name">${m.name}</h2>
-                    <span class="member-title">${m.title}</span>
-                    <p class="member-intro">${m.intro}</p>
-                </div>
+<footer>
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3>极速耐力跑团</h3>
+            <p>用脚步丈量城市，用坚持定义自我。我们是一群热爱长跑的追光者，在奔跑中遇见更好的自己。</p>
+            <div class="footer-contact">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>中国 · 上海 · 徐汇滨江跑步基地</span>
             </div>
-        `;
-    });
+            <div class="footer-contact">
+                <i class="fas fa-phone"></i>
+                <span>138-XXXX-8888</span>
+            </div>
+            <div class="footer-contact">
+                <i class="fas fa-envelope"></i>
+                <span>contact@jsnl-run.com</span>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h3>快速导航</h3>
+            <ul>
+                <li><a href="javascript:changePage('p1')">跑者档案</a></li>
+                <li><a href="javascript:changePage('p3')">呼吸训练</a></li>
+                <li><a href="javascript:changePage('p6')">秘境路线</a></li>
+                <li><a href="javascript:changePage('p10')">加入我们</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>关注我们</h3>
+            <ul>
+                <li><a href="#"><i class="fab fa-weixin"></i> 微信公众号：极速耐力</a></li>
+                <li><a href="#"><i class="fab fa-weibo"></i> 微博：@极速耐力跑团</a></li>
+                <li><a href="#"><i class="fab fa-douyin"></i> 抖音：jsnl_run</a></li>
+                <li><a href="#"><i class="fab fa-bilibili"></i> B站：极速耐力Official</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 极速耐力跑团 版权所有 | 沪ICP备XXXXXXXX号-1</p>
+        <p>免责声明：本网站内容仅作交流参考，跑步训练请结合自身身体状况科学进行</p>
+    </div>
+</footer>
 
-    // 优化的页面切换逻辑：更贴合长跑节奏
+<script>
     function changePage(pageId) {
         const overlay = document.getElementById('transition-overlay');
-        // 根据不同页面设置不同的转场文字
         const pageTexts = {
-            'p1': 'Runners',
-            'p2': 'Journey',
-            'p3': 'Breath',
-            'p4': 'Gear',
-            'p5': 'Energy',
-            'p6': 'Routes',
-            'p7': 'Races',
-            'p8': 'Finish',
-            'p9': 'Philosophy',
-            'p10': 'Join Us'
+            'p1': 'Runners', 'p2': 'Journey', 'p3': 'Breath', 'p4': 'Gear', 'p5': 'Energy',
+            'p6': 'Routes', 'p7': 'Races', 'p8': 'Finish', 'p9': 'Philosophy', 'p10': 'Join Us'
         };
         overlay.textContent = pageTexts[pageId] || 'Breathe & Run';
         
         overlay.classList.add('fade-active');
-
         setTimeout(() => {
-            // 隐藏所有页面
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            // 取消所有按钮激活状态
             document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-            
-            // 激活目标页面和按钮
             document.getElementById(pageId).classList.add('active');
             const btnIndex = pageId.replace('p', '') - 1;
             document.querySelectorAll('nav button')[btnIndex].classList.add('active');
-            
-            // 回到顶部
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth' // 平滑滚动，更符合长跑的流畅感
-            });
-            
-            // 关闭转场层
-            setTimeout(() => {
-                overlay.classList.remove('fade-active');
-            }, 300);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => overlay.classList.remove('fade-active'), 300);
         }, 600);
     }
 </script>
 
 </body>
 </html>
+
